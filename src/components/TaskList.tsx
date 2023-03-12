@@ -27,12 +27,12 @@ export function TaskList() {
 		};
 
 		if (newTaskTitle) {
-			const task: Task = {
+			const new_task: Task = {
 				id: Number(generated_id()),
 				title: newTaskTitle,
 				isComplete: false,
 			};
-			setTasks([...tasks, task]);
+			setTasks([...tasks, new_task]);
 		} else {
 			alert("Campo de input não pode estar vazio");
 		}
@@ -40,10 +40,17 @@ export function TaskList() {
 
 	function handleToggleTaskCompletion(id: number) {
 		// Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
+		let modified_obj_index = tasks.findIndex((task) => task.id === id);
+		tasks[modified_obj_index].isComplete
+			? (tasks[modified_obj_index].isComplete = false)
+			: (tasks[modified_obj_index].isComplete = true);
+		setTasks([...tasks]);
 	}
 
 	function handleRemoveTask(id: number) {
 		// Remova uma task da listagem pelo ID
+		let modified_arr = tasks.filter((task) => task.id !== id);
+		setTasks(modified_arr);
 	}
 
 	return (
